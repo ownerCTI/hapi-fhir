@@ -1,0 +1,154 @@
+name: 🐛 Bug Report
+description: Report a bug or unexpected behavior in HAPI-FHIR
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Thank you for reporting a bug!
+        
+        Please fill out the sections below to help us understand and reproduce the issue.
+        
+        **Before submitting:**
+        - Search [existing issues](https://github.com/hapifhir/hapi-fhir/issues) to avoid duplicates
+        - Check [documentation](https://hapifhir.io) for solutions
+        
+  - type: input
+    id: version
+    attributes:
+      label: HAPI-FHIR Version
+      description: What version of HAPI-FHIR are you using?
+      placeholder: "e.g., 6.10.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: fhir-version
+    attributes:
+      label: FHIR Version
+      description: Which FHIR version is affected?
+      multiple: true
+      options:
+        - R5
+        - R4B
+        - R4
+        - DSTU3
+        - DSTU2.1
+        - DSTU2
+        - All versions
+        - Not applicable
+    validations:
+      required: true
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: Affected Module(s)
+      description: Which module(s) are affected?
+      multiple: true
+      options:
+        - hapi-fhir-base (Core library)
+        - hapi-fhir-client (Client)
+        - hapi-fhir-server (Server)
+        - hapi-fhir-jpaserver-* (JPA Server)
+        - hapi-fhir-validation (Validation)
+        - hapi-fhir-structures-* (Structures)
+        - hapi-fhir-cli (CLI)
+        - Other
+        - Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of the bug
+      placeholder: |
+        What happened? What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Create a FhirContext for R4
+        2. Parse this JSON: { ... }
+        3. Call method X
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: code
+    attributes:
+      label: Code Example
+      description: Minimal code that reproduces the issue
+      render: java
+      placeholder: |
+        FhirContext ctx = FhirContext.forR4();
+        Patient patient = new Patient();
+        // ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Error Message / Stack Trace
+      description: Include any error messages or stack traces
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: FHIR Resources (if applicable)
+      description: Include relevant FHIR resources (JSON/XML)
+      render: json
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this bug?
+      options:
+        - Critical - System crash, data loss, security issue
+        - High - Major functionality broken
+        - Medium - Feature partially broken, workaround exists
+        - Low - Minor issue, cosmetic
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Additional environment information
+      placeholder: |
+        - Java version: 17
+        - OS: Ubuntu 22.04
+        - Database: PostgreSQL 15
+        - Spring Boot: 2.7.x
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: I have read the relevant documentation
+          required: true
+        - label: I can provide a minimal reproduction case if needed
+          required: false
+

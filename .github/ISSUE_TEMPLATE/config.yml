@@ -1,5 +1,17 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Getting Help / Community
-    url: https://github.com/hapifhir/hapi-fhir/wiki/Getting-Help
-    about: Please click here to learn about where to ask questions about HAPI FHIR
+  - name: 📚 Documentation
+    url: https://hapifhir.io
+    about: Check the documentation for guides and API reference
+  - name: 💬 Community Discussions
+    url: https://github.com/hapifhir/hapi-fhir/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📖 Stack Overflow
+    url: https://stackoverflow.com/questions/tagged/hapi-fhir
+    about: Search for existing answers or ask a new question
+  - name: 🔒 Security Vulnerabilities
+    url: https://github.com/hapifhir/hapi-fhir/security/advisories/new
+    about: Report security vulnerabilities (do not use issues)
+  - name: 💼 Commercial Support
+    url: https://smilecdr.com
+    about: Contact Smile CDR for enterprise support

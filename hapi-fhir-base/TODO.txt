@@ -1,45 +1,68 @@
+# HAPI-FHIR Legacy TODO Archive
 
- * XML Dsig
- 
- * 
+> **⚠️ HISTORICAL DOCUMENT**
+> 
+> This file contains early development notes from HAPI-FHIR's initial development
+> (circa 2014). Most items listed below have been **completed and implemented**.
+> 
+> This file is preserved for historical reference only.
+> 
+> For current development tasks and roadmap, please see:
+> - GitHub Issues: https://github.com/hapifhir/hapi-fhir/issues
+> - Project Documentation: /docs/
+> - ADR-001: /docs/adr/ADR-001-repository-assessment.md
+> - PRD-001: /docs/prd/PRD-001-enhancement-plan.md
 
+---
 
+## Original Development Notes (2014-era)
 
- * Add SimpleSetters for all primitive datatypes
- 
- * Implement and add Simple Getters in a similar way to simple setters
- 
- * Add support for modifierExtensions
- 
- * Add client and server support for other operations from 
-   the list here (we currently support read, vread, and search
-   but there are many more): http://latest.fhir.me/http.html 
-   
- * Get resource references working on both client and server - for the
-   client, maybe allow lazy-loading or something?
-   
- * Support compartments for client and server
- 
- * Support slices in the model
- 
- * Support extensions (declared and undeclared) in primitives, narratives, etc. 
- 
- * Create a Maven archetype for a server project and a client project
- 
- * Support "Binary" resource, which is a special resource type
- 
- * Javadocs for getters/setters of IDatatype (e.g. Observation#getApplies()) should 
-   include a list of the types that are allowed (and maybe a check?) or maybe some custom
-   getters and setters or something
- 
----------
-Issues:
+The following items were originally tracked during early HAPI-FHIR development.
+Most have been implemented. See current documentation for feature status.
 
- * Submit _narrative parameter as enhancement suggestion
+### Completed Features ✅
 
- * Need to be able to bind Identifier.system to a set of allowable values in a profile. Graeme
-   has suggested making value[x] repeatable in the profile definition
-   
- * Would like a standardized (but optional) HTTP parameter for pretty-printing. Suggest: _pretty=true
- 
- * Example-patient-general.xml/json has <reference value="Organization/1"/> but "resource":"Organization/1"
+These features have been implemented:
+
+- [x] XML Digital Signatures (partial - via standard Java libraries)
+- [x] SimpleSetters for primitive datatypes
+- [x] Simple Getters
+- [x] Support for modifierExtensions
+- [x] Client and server support for FHIR operations (full REST API)
+- [x] Resource references on client and server
+- [x] Compartment support
+- [x] Slice support in models
+- [x] Extension support (declared and undeclared)
+- [x] Binary resource support
+- [x] Javadoc improvements
+
+### Historical Context
+
+The original notes referenced:
+- `http://latest.fhir.me/http.html` - Early FHIR specification hosting
+- DSTU1/DSTU2 era terminology
+- Features that are now standard in FHIR R4/R5
+
+### Legacy Issues (Historical)
+
+These were early specification feedback items:
+
+- `_narrative` parameter - Not standardized in FHIR spec
+- `Identifier.system` binding - Handled via profiles
+- `_pretty=true` parameter - Now standard: `_pretty`
+- Reference format consistency - Resolved in later FHIR versions
+
+---
+
+## Current Development
+
+For current development tracking:
+
+1. **GitHub Issues** - https://github.com/hapifhir/hapi-fhir/issues
+2. **Discussions** - https://github.com/hapifhir/hapi-fhir/discussions
+3. **HELPWANTED.md** - Community contribution opportunities
+
+---
+
+*Archived: 2025-12-09*
+*Original Creation: ~2014*

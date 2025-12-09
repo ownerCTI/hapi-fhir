@@ -1,0 +1,139 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for HAPI-FHIR
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+        
+        Thank you for suggesting an improvement to HAPI-FHIR!
+        
+        Please fill out the sections below to help us understand your request.
+        
+  - type: dropdown
+    id: fhir-version
+    attributes:
+      label: Target FHIR Version(s)
+      description: Which FHIR version(s) should this feature support?
+      multiple: true
+      options:
+        - R5
+        - R4B
+        - R4
+        - DSTU3
+        - DSTU2
+        - All versions
+        - Not version-specific
+    validations:
+      required: true
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: Related Module(s)
+      description: Which module(s) would be affected?
+      multiple: true
+      options:
+        - hapi-fhir-base (Core library)
+        - hapi-fhir-client (Client)
+        - hapi-fhir-server (Server)
+        - hapi-fhir-jpaserver-* (JPA Server)
+        - hapi-fhir-validation (Validation)
+        - hapi-fhir-structures-* (Structures)
+        - hapi-fhir-cli (CLI)
+        - New module needed
+        - Other/Unknown
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: |
+        I'm trying to accomplish X, but currently I have to do Y which is problematic because Z.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How would you like this to work?
+      placeholder: |
+        I'd like to be able to call method X with parameter Y to achieve Z.
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Suggested API (if applicable)
+      description: How might the API look?
+      render: java
+      placeholder: |
+        // Example of how you'd like to use the feature
+        FhirContext ctx = FhirContext.forR4();
+        ctx.newFeature().doSomething();
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What alternatives have you considered?
+      placeholder: |
+        I've tried X but it doesn't work because Y.
+        Another option would be Z but it's not ideal because...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: fhir-spec
+    attributes:
+      label: FHIR Specification Reference
+      description: Is this related to a specific FHIR specification feature?
+      options:
+        - Yes - specific FHIR operation/feature
+        - No - HAPI-specific enhancement
+        - Unsure
+    validations:
+      required: true
+
+  - type: textarea
+    id: spec-reference
+    attributes:
+      label: Specification Link (if applicable)
+      description: Link to relevant FHIR specification
+      placeholder: "https://www.hl7.org/fhir/..."
+    validations:
+      required: false
+
+  - type: dropdown
+    id: contribution
+    attributes:
+      label: Willingness to Contribute
+      description: Would you be willing to help implement this feature?
+      options:
+        - "Yes - I can submit a PR"
+        - "Partial - I can help with testing/documentation"
+        - "No - I can only provide feedback"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this is not a duplicate
+          required: true
+        - label: This feature would benefit the broader HAPI-FHIR community
+          required: true
+        - label: I have checked the FHIR specification for relevant guidance
+          required: false
+
