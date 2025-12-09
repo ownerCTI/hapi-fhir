@@ -1,0 +1,69 @@
+# Documentation and Technical Debt Check
+# This workflow runs on PRs to ensure documentation standards are maintained
+
+name: Documentation Check
+
+on:
+  pull_request:
+    branches: [master]
+    paths:
+      - 'docs/**'
+      - '**.md'
+      - '.github/ISSUE_TEMPLATE/**'
+
+jobs:
+  markdown-lint:
+    name: Markdown Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Lint Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v14
+        with:
+          globs: |
+            docs/**/*.md
+            README.md
+            CONTRIBUTING.md
+            SECURITY.md
+        continue-on-error: true  # Don't fail build, just report
+
+  check-links:
+    name: Check Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          config-file: '.github/mlc_config.json'
+        continue-on-error: true  # Don't fail build, just report
+
+  todo-check:
+    name: TODO/FIXME Count
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Count TODO/FIXME comments
+        run: |
+          echo "## TODO/FIXME Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          TODO_COUNT=$(grep -r "TODO" --include="*.java" . | wc -l || echo "0")
+          FIXME_COUNT=$(grep -r "FIXME" --include="*.java" . | wc -l || echo "0")
+          HACK_COUNT=$(grep -r "HACK" --include="*.java" . | wc -l || echo "0")
+          
+          echo "| Type | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| TODO | $TODO_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "| FIXME | $FIXME_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "| HACK | $HACK_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Total: $((TODO_COUNT + FIXME_COUNT + HACK_COUNT))** items" >> $GITHUB_STEP_SUMMARY
+          
+          # This is informational only, don't fail the build
+          echo "TODO: $TODO_COUNT, FIXME: $FIXME_COUNT, HACK: $HACK_COUNT"
+

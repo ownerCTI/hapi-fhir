@@ -1,0 +1,170 @@
+name: 🔧 Technical Debt
+description: Report or track technical debt items (TODO, FIXME, refactoring needs)
+title: "[Tech Debt]: "
+labels: ["tech-debt", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Technical Debt Item
+        
+        Use this template to report code that needs improvement, cleanup, or refactoring.
+        
+        This includes:
+        - TODO/FIXME comments that should be addressed
+        - Code that needs refactoring
+        - Missing tests
+        - Documentation gaps
+        - Performance improvements
+        
+  - type: input
+    id: debt-id
+    attributes:
+      label: Technical Debt ID (if from inventory)
+      description: Reference from docs/TECHNICAL_DEBT_INVENTORY.md
+      placeholder: "e.g., TD-VAL-001"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: debt-type
+    attributes:
+      label: Type of Technical Debt
+      options:
+        - Implementation - Incomplete feature
+        - Test - Missing or disabled test
+        - Refactoring - Code restructuring needed
+        - Enhancement - Feature improvement
+        - Documentation - Missing/outdated docs
+        - Error Handling - Exception improvements
+        - Cleanup - Dead code, unused params
+        - Performance - Optimization needed
+        - Compatibility - Version compatibility
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "🔴 Critical - Security/data risk"
+        - "🟠 High - Significant functionality gap"
+        - "🟡 Medium - Code quality/maintainability"
+        - "🟢 Low - Nice to have"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: module
+    attributes:
+      label: Affected Module(s)
+      multiple: true
+      options:
+        - hapi-fhir-base
+        - hapi-fhir-client
+        - hapi-fhir-server
+        - hapi-fhir-jpaserver-base
+        - hapi-fhir-jpaserver-model
+        - hapi-fhir-jpaserver-searchparam
+        - hapi-fhir-validation
+        - hapi-fhir-structures-r5
+        - hapi-fhir-structures-r4
+        - hapi-fhir-structures-r4b
+        - hapi-fhir-structures-dstu3
+        - hapi-fhir-structures-dstu2
+        - hapi-fhir-structures-dstu2.1
+        - hapi-fhir-storage
+        - hapi-fhir-test-utilities
+        - hapi-tinder-plugin
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is the technical debt item?
+      placeholder: |
+        Describe what needs to be improved and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Code Location
+      description: Where is this technical debt located?
+      placeholder: |
+        File: hapi-fhir-validation/src/main/java/...
+        Line: 123
+        Method: validateResource()
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-code
+    attributes:
+      label: Current Code (if applicable)
+      description: Show the problematic code
+      render: java
+    validations:
+      required: false
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: How should this be fixed?
+      placeholder: |
+        1. Extract interface from class X
+        2. Move implementation to Y
+        3. Add tests for Z
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact of Not Addressing
+      description: What happens if we don't fix this?
+      placeholder: |
+        - Increased maintenance burden
+        - Potential bugs in feature X
+        - Poor developer experience when...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: breaking-change
+    attributes:
+      label: Breaking Change?
+      description: Would fixing this require a breaking change?
+      options:
+        - "No - Can be fixed without breaking changes"
+        - "Maybe - Might require deprecation"
+        - "Yes - Will require breaking change"
+        - "Unknown"
+    validations:
+      required: true
+
+  - type: input
+    id: effort
+    attributes:
+      label: Estimated Effort
+      description: How much effort to fix?
+      placeholder: "e.g., 1-2 hours, 1 day, 1 week"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: labels
+    attributes:
+      label: Suggested Labels
+      description: Select applicable labels
+      options:
+        - label: "good first issue - Suitable for new contributors"
+        - label: "help wanted - Community help appreciated"
+        - label: "needs-discussion - Requires design discussion"
+
